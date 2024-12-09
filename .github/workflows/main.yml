@@ -41,16 +41,16 @@ jobs:
           name: allure-report
           path: allure-report
 
-      - name: Send email with Allure report
-        env:
-          EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
-          EMAIL_SMTP_SERVER: ${{ secrets.EMAIL_SMTP_SERVER }}
-          EMAIL_SMTP_PORT: ${{ secrets.EMAIL_SMTP_PORT }}
-          EMAIL_SMTP_USER: ${{ secrets.EMAIL_SMTP_USER }}
-          EMAIL_SMTP_PASS: ${{ secrets.EMAIL_SMTP_PASS }}
-        run: node send-email.js
+      # - name: Send email with Allure report
+      #   env:
+      #     EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
+      #     EMAIL_SMTP_SERVER: ${{ secrets.EMAIL_SMTP_SERVER }}
+      #     EMAIL_SMTP_PORT: ${{ secrets.EMAIL_SMTP_PORT }}
+      #     EMAIL_SMTP_USER: ${{ secrets.EMAIL_SMTP_USER }}
+      #     EMAIL_SMTP_PASS: ${{ secrets.EMAIL_SMTP_PASS }}
+      #   run: node send-email.js
 
-      - name: Send Slack notification
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        run: node notify-slack.js "Build Status" "All tests passed successfully."
+      # - name: Send Slack notification
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #   run: node notify-slack.js "Build Status" "All tests passed successfully."
