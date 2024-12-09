@@ -2,8 +2,8 @@
   "name": "structure-playwrite",
   "version": "1.0.0",
   "main": "index.js",
- "scripts": {
-  "test": "npx playwright test --reporter=line,allure-playwright",
+  "scripts": {
+    "test": "npx playwright test --reporter=line,allure-playwright",
     "test:ui": "npx playwright show-report",
     "test:debug": "PWDEBUG=1 npx playwright test",
     "test:record": "npx playwright codegen",
@@ -18,9 +18,7 @@
     "@types/node": "^22.7.5",
     "allure-commandline": "^2.32.0",
     "allure-playwright": "^3.0.7"
-  }
-}
-
+  },
   "dependencies": {
     "playwright": "^1.49.0"
   }
