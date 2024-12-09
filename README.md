@@ -13,7 +13,7 @@ his project demonstrates how to use Playwright for end-to-end testing, including
 
 1. **Clone the repository**:
    ```sh
-   git clone https://github.com/your-username/gpt-structure-playwrite.git
+   git clone https://github.com/your-username/structure-playwrite.git
    cd gpt-structure-playwrite
 Install dependencies:
 
