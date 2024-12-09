@@ -57,12 +57,13 @@ Copy code
 ├── README.md                   # Project documentation
 └── .prettierrc                 # Prettier configuration
 Scripts
-npm test: Run all Playwright tests.
-npm run test:ui: Open Playwright test report.
-npm run test:debug: Run tests in debug mode.
-npm run test:record: Record tests using Playwright Codegen.
-npm run test:report: Generate and open Allure reports.
-npm run format: Format code using Prettier.
+Script	Description
+npm test	Run all Playwright tests.
+npm run test:ui	Open Playwright test report.
+npm run test:debug	Run tests in debug mode.
+npm run test:record	Record tests using Playwright Codegen.
+npm run test:report	Generate and open Allure reports.
+npm run format	Format code using Prettier.
 Example Tests
 1. Google Search Test
 The test navigates to Google, searches for a term, and asserts that the results are correct.
