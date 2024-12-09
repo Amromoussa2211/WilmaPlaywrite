@@ -1,78 +1,98 @@
-his project demonstrates how to use Playwright for end-to-end testing, including sample tests for Google login, Orange login, and a simple API test.
+Overview
+This is a simple Playwright project designed to:
 
-## Table of Contents
+Automate a browser test that navigates to Google, searches for a term, and asserts the results.
+Include an API test to demonstrate basic API testing capabilities.
+Features
+Automated browser testing using Playwright.
+Simple API testing example.
+Prettier for code formatting.
+Allure reports for detailed test results.
+Setup Instructions
+1. Prerequisites
+Ensure you have the following installed:
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Running Tests](#running-tests)
-- [Linting and Formatting](#linting-and-formatting)
-- [Dependencies](#dependencies)
-- [License](#license)
-
-## Installation
-
-1. **Clone the repository**:
-   ```sh
-   git clone https://github.com/your-username/structure-playwrite.git
-   cd gpt-structure-playwrite
-Install dependencies:
-
+Node.js (v14 or higher)
+A package manager like npm (comes with Node.js)
+2. Clone the Repository
+bash
+Copy code
+git clone https://github.com/your-username/structure-playwright.git
+cd structure-playwright
+3. Install Dependencies
+bash
+Copy code
 npm install
 Usage
-Running Tests
-Run all tests:
-
-
+1. Run Tests
+To execute the tests:
+bash
+Copy code
 npm test
-Run tests with UI:
-
-
-npm run test\:ui
-Run tests in debug mode:
-
-
-npm run test\:debug
-Generate and open Allure report:
-
-
-npm run test\:report
-Record tests:
-
-
-npm run test\:record
-Linting and Formatting
-Lint the code:
-
-
-npm run lint
-Format the code:
-
-
+To debug tests:
+bash
+Copy code
+npm run test:debug
+2. Generate Reports
+Run the following command to generate and open Allure reports:
+bash
+Copy code
+npm run test:report
+3. Code Formatting
+To format the code using Prettier:
+bash
+Copy code
 npm run format
-Cleaning and Building
-Clean the project:
+Project Structure
+Here’s an overview of the project’s structure:
 
+bash
+Copy code
+.
+├── tests/                      # Test cases (Google test & API test)
+├── allure-results/             # Allure report results
+├── node_modules/               # Project dependencies
+├── package.json                # Project scripts and dependencies
+├── playwright.config.js        # Playwright configuration
+├── README.md                   # Project documentation
+└── .prettierrc                 # Prettier configuration
+Scripts
+npm test: Run all Playwright tests.
+npm run test:ui: Open Playwright test report.
+npm run test:debug: Run tests in debug mode.
+npm run test:record: Record tests using Playwright Codegen.
+npm run test:report: Generate and open Allure reports.
+npm run format: Format code using Prettier.
+Example Tests
+1. Google Search Test
+The test navigates to Google, searches for a term, and asserts that the results are correct.
 
-npm run clean
-Build the project:
+javascript
+Copy code
+// Sample Test
+test('Google Search Test', async ({ page }) => {
+  await page.goto('https://www.google.com');
+  await page.fill('input[name="q"]', 'Playwright');
+  await page.press('input[name="q"]', 'Enter');
+  await expect(page).toHaveTitle(/Playwright/);
+});
+2. API Test
+A basic API test to demonstrate Playwright's API testing features.
 
-
-npm run build
-Dependencies
-Development Dependencies
-@playwright/test: Playwright test runner.
-allure-playwright: Allure reporter for Playwright.
-depcheck: Check for unused dependencies.
-prettier: Code formatter.
-Production Dependencies
-playwright: Playwright library for browser automation.
-License
-This project is licensed under the ISC License.
-
+javascript
+Copy code
+// Sample API Test
+test('Sample API Test', async ({ request }) => {
+  const response = await request.get('https://jsonplaceholder.typicode.com/posts/1');
+  expect(response.ok()).toBeTruthy();
+  const data = await response.json();
+  expect(data.id).toBe(1);
+});
 Contributing
-Contributions are welcome! Please open an issue or submit a pull request.
+Contributions are welcome! If you have ideas or find issues, feel free to submit a pull request or create an issue.
 
-Acknowledgements
-Playwright
-Allure
-Prettier
+License
+This project is licensed under the ISC License. See the LICENSE file for details.
+
+Contact
+If you have any questions or need further assistance, feel free to reach out at amro_kaza@hotmail.com
