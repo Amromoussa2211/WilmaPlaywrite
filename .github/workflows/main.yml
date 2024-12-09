@@ -19,10 +19,14 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16' # Updated to use a newer version of Node.js
+          node-version: '16' # Updated Node.js version
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
+
+      - name: Output npm install debug log
+        if: failure()
+        run: cat /home/runner/.npm/_logs/*-debug-0.log
 
       - name: Run tests
         run: npx playwright test --reporter=line,allure-playwright
@@ -33,7 +37,7 @@ jobs:
       - name: Verify allure-report.zip exists
         run: |
           zip -r allure-report.zip allure-report
-          ls -l allure-report.zip # Debug to verify file exists
+          ls -l allure-report.zip
 
       - name: Archive Allure report
         uses: actions/upload-artifact@v3
@@ -41,6 +45,7 @@ jobs:
           name: allure-report
           path: allure-report
 
+      # Commented out Slack and email until they are set up
       # - name: Send email with Allure report
       #   env:
       #     EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
