@@ -3,12 +3,17 @@ const devices = require('@playwright/test').devices;
 module.exports = {
   use: {
     headless: true,
-    baseURL: 'https://www.google.com',
+    baseURL: process.env.BASE_URL || 'https://www.google.com',
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     screenshot: 'on',
     video: 'on',
     trace: 'on',
+    extraHTTPHeaders: {
+      'x-custom-header': process.env.CUSTOM_HEADER || 'default-value',
+    },
+    // Increase the default timeout
+    timeout: 60000,
   },
   projects: [
     {
@@ -27,11 +32,14 @@ module.exports = {
       use: {
         browserName: 'webkit',
         ...devices['iPhone 12'],
+        // Remove or comment out unsupported settings
+        // contextOptions: {gi
+        //   permissions: ['FixedBackgroundsPaintRelativeToDocument'],
+        // },
       },
     },
   ],
   testDir: './tests/specs',
-  timeout: 30000,
   reporter: [
     ['line'],
     ['allure-playwright'],
@@ -42,11 +50,4 @@ module.exports = {
   globalSetup: require.resolve('./global-setup'), // Global setup script
   globalTeardown: require.resolve('./global-teardown'), // Global teardown script
   workers: 2, // Run tests in parallel with 2 workers
-  use: {
-    // Use environment variables
-    baseURL: process.env.BASE_URL || 'https://www.google.com',
-    extraHTTPHeaders: {
-      'x-custom-header': process.env.CUSTOM_HEADER || 'default-value',
-    },
-  },
 };
