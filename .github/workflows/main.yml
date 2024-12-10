@@ -48,6 +48,13 @@ jobs:
           name: allure-report
           path: allure-report
 
+      - name: Upload Playwright logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-logs
+          path: test-results/
+
       # Commented out Slack and email until they are set up
       # - name: Send email with Allure report
       #   env:
