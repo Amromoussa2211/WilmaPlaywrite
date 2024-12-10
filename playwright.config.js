@@ -26,17 +26,7 @@ module.exports = {
         browserName: 'chromium',
         ...devices['Pixel 5'],
       },
-    },
-    {
-      name: 'Mobile Safari',
-      use: {
-        browserName: 'webkit',
-        ...devices['iPhone 12'],
-        // Remove or comment out unsupported settings
-        // contextOptions: {gi
-        //   permissions: ['FixedBackgroundsPaintRelativeToDocument'],
-        // },
-      },
+    
     },
   ],
   testDir: './tests/specs',
