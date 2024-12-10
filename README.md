@@ -1,5 +1,5 @@
 Overview
-This is a simple Playwright project designed to:
+This is a simple Playwright project designed to: 
 
 Automate a browser test that navigates to Google, searches for a term, and asserts the results.
 Include an API test to demonstrate basic API testing capabilities.
