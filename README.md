@@ -1,4 +1,4 @@
-Overview
+# **Overview
 This is a simple Playwright project designed to: 
 
 Automate a browser test that navigates to Google, searches for a term, and asserts the results.
@@ -97,3 +97,4 @@ This project is licensed under the ISC License. See the LICENSE file for details
 
 Contact
 If you have any questions or need further assistance, feel free to reach out at amro_kaza@hotmail.com
+**
