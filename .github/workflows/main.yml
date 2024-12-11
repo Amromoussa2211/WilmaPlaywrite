@@ -31,9 +31,13 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
+      - name: Set HEADLESS environment variable
+        run: echo "HEADLESS=true" >> $GITHUB_ENV
+
+      - name: Verify HEADLESS environment variable
+        run: echo "HEADLESS is set to $HEADLESS"
+
       - name: Run tests
-        env:
-          HEADLESS: 'true'
         run: npx playwright test --reporter=line,allure-playwright
 
       - name: Generate Allure report

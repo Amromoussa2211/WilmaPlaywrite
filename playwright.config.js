@@ -3,7 +3,7 @@ require('dotenv').config();
 
 module.exports = {
   use: {
-    headless: process.env.HEADLESS === 'true',
+    headless: process.env.HEADLESS === 'true', // Ensure this is correctly set
     baseURL: process.env.BASE_URL || 'https://www.google.com',
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
@@ -44,19 +44,6 @@ module.exports = {
         'appium:newCommandTimeout': 60,
       },
     },
-    // {
-    //   name: 'iOS',
-    //   use: {
-    //     browserName: 'webkit',
-    //     platformName: 'iOS',
-    //     'appium:automationName': 'XCUITest',
-    //     'appium:deviceName': process.env.IOS_DEVICE_NAME || 'iPhone 13',
-    //     'appium:platformVersion': process.env.IOS_PLATFORM_VERSION || '15.0',
-    //     'appium:app': process.env.IOS_APP_PATH || './apps/ios/sample-app.ipa',
-    //     'appium:bundleId': process.env.IOS_BUNDLE_ID || 'com.example.app',
-    //     'appium:udid': process.env.IOS_UDID,
-    //   },
-    // },
     {
       name: 'Mobile Web',
       use: {
