@@ -32,6 +32,8 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run tests
+        env:
+          HEADLESS: 'true'
         run: npx playwright test --reporter=line,allure-playwright
 
       - name: Generate Allure report
