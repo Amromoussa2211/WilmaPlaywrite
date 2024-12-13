@@ -1,32 +1,56 @@
-// // tests/specs/telegram.spec.js
-// const { test, expect } = require('@playwright/test');
+// const wd = require('wd'); // Import Appium WebDriver
+// const { test } = require('@playwright/test');
+// const path = require('path');
+// require('dotenv').config();
 
-// test.describe('Telegram App Tests @mobile @android', () => {
-//   test('should launch Telegram app and find element', async ({ page }) => {
-//     // Launch the Telegram app
-//     await page.goto('http://localhost:4723/wd/hub');
+// test.describe('Telegram Native Android App Tests with Appium', () => {
+//   let driver;
 
-//     // Wait for the app to launch and find an element (e.g., the login button)
-//     const loginButton = await page.locator('//*[@text="LOG IN"]');
-//     await expect(loginButton).toBeVisible();
+//   const desiredCapabilities = {
+//     platformName: 'Android',
+//     deviceName: process.env.ANDROID_DEVICE_NAME, // From .env file
+//     udid: process.env.ANDROID_DEVICE_SERIAL,     // From .env file
+//     app: path.resolve(process.env.ANDROID_APP_PATH), // Resolve APK path
+//     automationName: 'UiAutomator2',
+//     platformVersion: process.env.ANDROID_PLATFORM_VERSION, // From .env file
+//     autoGrantPermissions: true,
+//   };
 
-//     // Perform actions (e.g., click the login button)
-//     await loginButton.click();
+//   test.beforeAll(async () => {
+//     driver = wd.promiseChainRemote(process.env.APPIUM_HOST, process.env.APPIUM_PORT);
 
-//     // Add more steps as needed
+//     try {
+//       console.log('Initializing Appium session...');
+//       await driver.init(desiredCapabilities); // Use desired capabilities here
+//       console.log('Appium session started successfully.');
+//     } catch (error) {
+//       console.error('Failed to start Appium session:', error);
+//       throw error;
+//     }
 //   });
 
-//   test('verify app navigation', async ({ page }) => {
-//     // Launch the Telegram app
-//     await page.goto('http://localhost:4723/wd/hub');
+//   test('App launches successfully', async () => {
+//     try {
+//       // Wait for the app to launch
+//       await driver.waitForElementByAndroidUIAutomator(
+//         'new UiSelector().packageName("org.telegram.messenger")',
+//         30000 // Timeout after 30 seconds
+//       );
+//       console.log('App launched successfully.');
+//     } catch (error) {
+//       console.error('Failed to verify app launch:', error);
+//       throw error;
+//     }
+//   });
 
-//     // Navigate to a specific screen (e.g., the contacts screen)
-//     await page.locator('//*[@text="Contacts"]').click();
-
-//     // Verify the navigation
-//     const contactsScreen = await page.locator('//*[@text="Contacts"]');
-//     await expect(contactsScreen).toBeVisible();
-
-//     // Add more steps as needed
+//   test.afterAll(async () => {
+//     if (driver) {
+//       try {
+//         await driver.quit();
+//         console.log('Appium session ended.');
+//       } catch (error) {
+//         console.error('Error during Appium session teardown:', error);
+//       }
+//     }
 //   });
 // });

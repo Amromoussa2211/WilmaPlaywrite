@@ -20,32 +20,32 @@ module.exports = {
       name: 'Desktop Chrome',
       use: {
         browserName: 'chromium',
+        viewport: { width: 1920, height: 1080 },
       },
     },
+    // Web Mobile Tests
     {
       name: 'Mobile Chrome',
       use: {
-        browserName: 'chromium',
         ...devices['Pixel 5'],
-      },
-    },
-    {
-      name: 'Android',
-      use: {
         browserName: 'chromium',
-        platformName: 'Android',
-        'appium:automationName': 'UiAutomator2',
-        'appium:deviceName': process.env.ANDROID_DEVICE_NAME || 'Pixel 4',
-        'appium:platformVersion': process.env.ANDROID_PLATFORM_VERSION || '12.0',
-        'appium:app': process.env.ANDROID_APP_PATH || './apps/android/telegram.apk',
-        'appium:appPackage': process.env.ANDROID_APP_PACKAGE || 'org.telegram.messenger',
-        'appium:appActivity': process.env.ANDROID_APP_ACTIVITY || '.ui.LaunchActivity',
-        'appium:noReset': true,
-        'appium:newCommandTimeout': 60,
       },
     },
+    // Native Android App Tests
+    // {
+    //   name: 'Android Native',
+    //   use: {
+    //     browserName: 'chromium',
+    //     android: {
+    //       android: true, // Enable Android testing
+
+    //       deviceId: process.env.ANDROID_DEVICE_SERIAL,
+    //     },
+    //   },
+    // },
+    // Android Web Tests
     {
-      name: 'Mobile Web',
+      name: 'Android Web',
       use: {
         ...devices['Pixel 5'],
         browserName: 'chromium',

@@ -97,10 +97,12 @@ test-results/
 # Screenshots and videos
 screenshots/
 videos/
-
+*.apk
+.apk
 # Allure reports
 allure-report/
 allure-results/
+allure-report.zip
 
 # IDEs and editors
 .vscode/

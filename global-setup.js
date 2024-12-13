@@ -1,6 +1,18 @@
-// global-setup.js
-module.exports = async () => {
-  // Your setup logic here
-  console.log('Global setup: Initializing resources...');
-  // For example, start a server or prepare test data
+const { chromium } = require('@playwright/test');
+require('dotenv').config();
+
+module.exports = async (config) => {
+  // Global setup tasks
+  console.log('Global setup started');
+  
+  // Optional: Start Appium server
+  if (process.env.APPIUM_HOST) {
+    const { startAppium } = require('./appium-server');
+    await startAppium();
+  }
+
+  // Optional: Prepare test environment
+  return async () => {
+    console.log('Global setup completed');
+  };
 };
