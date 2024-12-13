@@ -19,7 +19,7 @@ bash
 Copy code
 git clone https://github.com/your-username/structure-playwright.git
 cd structure-playwright
-3. Install Dependencies.
+3. Install Dependencies .
 bash
 Copy code
 npm install
