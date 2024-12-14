@@ -1,9 +1,11 @@
-const { devices } = require('@playwright/test');
-require('dotenv').config();
+import { devices } from '@playwright/test';
+import dotenv from 'dotenv';
 
-module.exports = {
+dotenv.config();
+
+export default {
   use: {
-    headless: process.env.HEADLESS === 'true', // Ensure this is correctly set
+    headless: process.env.HEADLESS === 'true',
     baseURL: process.env.BASE_URL || 'https://www.google.com',
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
@@ -23,7 +25,6 @@ module.exports = {
         viewport: { width: 1920, height: 1080 },
       },
     },
-    // Web Mobile Tests
     {
       name: 'Mobile Chrome',
       use: {
@@ -31,24 +32,18 @@ module.exports = {
         browserName: 'chromium',
       },
     },
-    // Native Android App Tests
-    // {
-    //   name: 'Android Native',
-    //   use: {
-    //     browserName: 'chromium',
-    //     android: {
-    //       android: true, // Enable Android testing
-
-    //       deviceId: process.env.ANDROID_DEVICE_SERIAL,
-    //     },
-    //   },
-    // },
-    // Android Web Tests
     {
       name: 'Android Web',
       use: {
         ...devices['Pixel 5'],
         browserName: 'chromium',
+      },
+    },
+    {
+      name: 'Web',
+      use: {
+        browserName: 'chromium',
+        viewport: { width: 1280, height: 720 },
       },
     },
   ],
@@ -60,7 +55,5 @@ module.exports = {
   ],
   outputDir: 'test-results/',
   retries: 1,
-  globalSetup: require.resolve('./global-setup'),
-  globalTeardown: require.resolve('./global-teardown'),
   workers: process.env.CI ? 1 : 1,
 };

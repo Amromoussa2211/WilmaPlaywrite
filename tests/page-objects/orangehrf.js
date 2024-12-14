@@ -25,4 +25,4 @@ class Orange {
   }
 }
 
-module.exports = Orange;
+export default Orange;

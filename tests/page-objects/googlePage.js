@@ -20,4 +20,4 @@ class GooglePage {
   }
 }
 
-module.exports = GooglePage;
+export default GooglePage;

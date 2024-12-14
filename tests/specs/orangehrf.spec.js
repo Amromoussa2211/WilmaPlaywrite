@@ -1,5 +1,5 @@
-const { test, expect } = require('@playwright/test');
-const Orange = require('../page-objects/orangehrf'); // Import your Orange class
+import { test, expect } from '@playwright/test';
+import Orange from '../page-objects/orangehrf'; // Import your Orange class
 
 test.describe('OrangeHRM Login Tests', () => {
   let orange;
