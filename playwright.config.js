@@ -3,7 +3,7 @@ require('dotenv').config();
 
 module.exports = {
   use: {
-    headless: process.env.HEADLESS === 'false', // Ensure this is correctly set
+    headless: process.env.HEADLESS === 'true', // Ensure this is correctly set
     baseURL: process.env.BASE_URL || 'https://www.google.com',
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
