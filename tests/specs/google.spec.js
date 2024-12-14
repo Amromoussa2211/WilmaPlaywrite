@@ -1,5 +1,5 @@
-const { test, expect } = require('@playwright/test');
-const GooglePage = require('../page-objects/googlePage');
+import { test, expect } from '@playwright/test';
+import GooglePage from '../page-objects/googlePage';
 
 test.describe('Google Search', () => {
   let googlePage;
