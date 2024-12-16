@@ -13,67 +13,72 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgbm-dev libatk-bridge2.0-0 libgtk-3-0 libx11-xcb1 libnss3 libxss1
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: |
+          npm ci
+          npm install web-streams-polyfill
+          npx playwright install --with-deps
+          npx playwright install-deps
 
-      - name: Output npm install debug log
-        if: failure()
-        run: cat /home/runner/.npm/_logs/*-debug-0.log
+      - name: Set environment variables
+        run: |
+          echo "HEADLESS=true" >> $GITHUB_ENV
+          echo "NODE_OPTIONS=--max_old_space_size=4096" >> $GITHUB_ENV
 
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
-
-      - name: Set HEADLESS environment variable
-        run: echo "HEADLESS=true" >> $GITHUB_ENV
-
-      - name: Verify HEADLESS environment variable
-        run: echo "HEADLESS is set to $HEADLESS"
-
-      - name: Run tests
-        run: npx playwright test --reporter=line,allure-playwright
+      - name: Run Playwright tests
+        run: |
+          node --version
+          npx playwright test --reporter=line,allure-playwright
+        env:
+          NODE_OPTIONS: >-
+            --experimental-vm-modules 
+            --max_old_space_size=4096 
+            -r web-streams-polyfill/dist/ponyfill.es6.js
 
       - name: Generate Allure report
-        run: npx allure generate allure-results --clean -o allure-report
-
-      - name: Verify allure-report.zip exists
+        if: always()
         run: |
+          npx allure generate allure-results --clean -o allure-report
           zip -r allure-report.zip allure-report
-          ls -l allure-report.zip
 
-      - name: Archive Allure report
-        uses: actions/upload-artifact@v3
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: allure-report
-          path: allure-report
+          path: allure-report.zip
 
-      - name: Upload Playwright logs
+      - name: Upload Playwright test results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: playwright-logs
+          name: playwright-test-results
           path: test-results/
+          retention-days: 7
 
-      # Commented out Slack and email until they are set up
-      # - name: Send email with Allure report
-      #   env:
-      #     EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
-      #     EMAIL_SMTP_SERVER: ${{ secrets.EMAIL_SMTP_SERVER }}
-      #     EMAIL_SMTP_PORT: ${{ secrets.EMAIL_SMTP_PORT }}
-      #     EMAIL_SMTP_USER: ${{ secrets.EMAIL_SMTP_USER }}
-      #     EMAIL_SMTP_PASS: ${{ secrets.EMAIL_SMTP_PASS }}
-      #   run: node send-email.js
-
-      # - name: Send Slack notification
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      #   run: node notify-slack.js "Build Status" "All tests passed successfully."
+      - name: Output debug information on failure
+        if: failure()
+        run: |
+          echo "Node.js version:"
+          node --version
+          echo "NPM version:"
+          npm --version
+          echo "Installed browsers:"
+          npx playwright installed-browsers
+          cat /home/runner/.npm/_logs/*-debug.log
