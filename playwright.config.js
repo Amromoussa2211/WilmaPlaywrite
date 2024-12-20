@@ -56,4 +56,6 @@ export default {
   outputDir: 'test-results/',
   retries: 1,
   workers: process.env.CI ? 1 : 1,
+  //globalSetup: require.resolve('./tests/setup.js'),
+
 };

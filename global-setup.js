@@ -1,18 +1,11 @@
-// const { chromium } = require('@playwright/test');
-// require('dotenv').config();
+const { startAppium, stopAppium } = require('./appium-server');
 
-// module.exports = async (config) => {
-//   // Global setup tasks
-//   console.log('Global setup started');
-  
-//   // Optional: Start Appium server
-//   if (process.env.APPIUM_HOST) {
-//     const { startAppium } = require('./appium-server');
-//     await startAppium();
-//   }
+beforeAll(async () => {
+  await startAppium();
+  // Additional setup code
+});
 
-//   // Optional: Prepare test environment
-//   return async () => {
-//     console.log('Global setup completed');
-//   };
-// };
+afterAll(async () => {
+  await stopAppium();
+  // Additional teardown code
+});
