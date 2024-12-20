@@ -43,9 +43,8 @@ jobs:
       - name: Run Playwright tests
         run: |
           node --version
-          npx playwright test --reporter=line,allure-playwright
+          npm run test:playwright
         env:
-          NODE_OPTIONS: "--experimental-vm-modules --max_old_space_size=4096 -r web-streams-polyfill/ponyfill/es6"
           HEADLESS: true
 
       - name: Generate Allure report
