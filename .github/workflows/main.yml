@@ -39,7 +39,7 @@ jobs:
       - name: Set environment variables
         run: |
           echo "HEADLESS=true" >> $GITHUB_ENV
-          echo "NODE_OPTIONS=--max_old_space_size=4096" >> $GITHUB_ENV
+          echo "NODE_OPTIONS=--experimental-vm-modules --max_old_space_size=4096 -r web-streams-polyfill/ponyfill/es6" >> $GITHUB_ENV
 
       - name: Run Playwright tests
         run: |
@@ -80,5 +80,5 @@ jobs:
           echo "NPM version:"
           npm --version
           echo "Installed browsers:"
-          npx playwright install --list
+          npx playwright show-browsers
           cat /home/runner/.npm/_logs/*-debug.log
