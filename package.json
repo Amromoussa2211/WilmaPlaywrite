@@ -20,7 +20,7 @@
     "screenshot-report": "node screenshot-report.js",
     "full-report": "npm run report && npm run zip-report && npm run send-email",
     "test:unit": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "test:playwright": "NODE_OPTIONS='--experimental-vm-modules --max_old_space_size=4096 -r web-streams-polyfill/dist/ponyfill.es6.js' npx playwright test --reporter=line,allure-playwright"
+    "test:playwright": "NODE_OPTIONS='--experimental-vm-modules --max_old_space_size=4096 -r web-streams-polyfill/dist/ponyfill.js' npx playwright test --reporter=line,allure-playwright"
   },
   "keywords": [
     "mobile testing",
