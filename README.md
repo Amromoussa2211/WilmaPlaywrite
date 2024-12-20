@@ -97,4 +97,4 @@ This project is licensed under the ISC License. See the LICENSE file for details
 
 Contact
 If you have any questions or need further assistance, feel free to reach out at amro_kaza@hotmail.com
-** 
+** .ß
