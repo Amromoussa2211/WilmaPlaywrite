@@ -49,7 +49,7 @@ jobs:
           NODE_OPTIONS: >-
             --experimental-vm-modules 
             --max_old_space_size=4096 
-            -r web-streams-polyfill/dist/ponyfill.es6.js
+            -r web-streams-polyfill/ponyfill/es6
 
       - name: Generate Allure report
         if: always()
@@ -80,5 +80,5 @@ jobs:
           echo "NPM version:"
           npm --version
           echo "Installed browsers:"
-          npx playwright show-browsers
+          npx playwright install --list
           cat /home/runner/.npm/_logs/*-debug.log
