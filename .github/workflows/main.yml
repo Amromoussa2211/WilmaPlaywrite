@@ -76,5 +76,5 @@ jobs:
           echo "NPM version:"
           npm --version
           echo "Installed browsers:"
-          npx playwright install --list
+          npx playwright show-browsers
           cat /home/runner/.npm/_logs/*-debug.log
