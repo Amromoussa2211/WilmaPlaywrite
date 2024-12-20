@@ -39,17 +39,14 @@ jobs:
       - name: Set environment variables
         run: |
           echo "HEADLESS=true" >> $GITHUB_ENV
-          echo "NODE_OPTIONS=--experimental-vm-modules --max_old_space_size=4096 -r web-streams-polyfill/ponyfill/es6" >> $GITHUB_ENV
 
       - name: Run Playwright tests
         run: |
           node --version
           npx playwright test --reporter=line,allure-playwright
         env:
-          NODE_OPTIONS: >-
-            --experimental-vm-modules 
-            --max_old_space_size=4096 
-            -r web-streams-polyfill/ponyfill/es6
+          NODE_OPTIONS: "--experimental-vm-modules --max_old_space_size=4096 -r web-streams-polyfill/ponyfill/es6"
+          HEADLESS: true
 
       - name: Generate Allure report
         if: always()
