@@ -15,6 +15,14 @@ function logAndThrow(message) {
     throw new Error(message);
 }
 
+// Ensure APK path is correct
+const apkPath = path.resolve(process.cwd(), process.env.ANDROID_APP_PATH);
+if (!fs.existsSync(apkPath)) {
+    logAndThrow(`APK not found at: ${apkPath}`);
+} else {
+    console.log(`APK found at: ${apkPath}`);
+}
+
 // Diagnostic function for system environment
 function getSystemDiagnostics() {
     try {
@@ -50,7 +58,7 @@ function prepareAppiumCapabilities() {
     }
 
     // Resolve full path to APK
-    const appPath = path.resolve(process.env.ANDROID_APP_PATH);
+    const appPath = path.resolve(process.cwd(), process.env.ANDROID_APP_PATH);
     if (!fs.existsSync(appPath)) {
         logAndThrow(`APK not found at: ${appPath}`);
     }
